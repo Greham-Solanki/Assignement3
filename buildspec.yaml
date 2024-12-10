@@ -17,4 +17,12 @@ phases:
     commands:
       - echo Pushing the Docker image...
       - docker push 767397745665.dkr.ecr.us-east-1.amazonaws.com/solanki-flask-app:latest
+      - echo Creating imagedefinitions.json...
+      - printf '[{"name":"flask-app","imageUri":"767397745665.dkr.ecr.us-east-1.amazonaws.com/solanki-flask-app:latest"}]' > imagedefinitions.json
+
+artifacts:
+  files:
+    - '/*'                 # Include all files in the current directory
+    - imagedefinitions.json   # Explicitly include the imagedefinitions.json file
+
 
