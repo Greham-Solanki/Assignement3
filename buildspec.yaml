@@ -17,3 +17,9 @@ phases:
     commands:
       - echo Pushing the Docker image...
       - docker push 767397745665.dkr.ecr.us-east-1.amazonaws.com/solanki-flask-app:latest
+      - echo Writing AppSpec file...
+      - printf "version: 0.0\nResources:\n  - TargetService:\n      Type: AWS::ECS::Service\n      Properties:\n        TaskDefinition: \"solanki-task\"\n        LoadBalancerInfo:\n          ContainerName: \"flask-app\"\n          ContainerPort: 5000\n" > appspec.yml
+
+artifacts:
+  files:
+    - appspec.yml
